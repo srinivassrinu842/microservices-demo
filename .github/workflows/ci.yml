@@ -31,6 +31,7 @@ jobs:
           - recommendationservice
           - shippingservice
           - shoppingassistantservice
+          - cartservice
 
     steps:
       - name: Checkout
@@ -53,22 +54,11 @@ jobs:
       - name: Build and push ${{ matrix.service }}
         uses: docker/build-push-action@v5
         with:
-          context: ./src/${{ matrix.service }}
+          context: context: ${{ matrix.service == 'cartservice' && './src/cartservice/src' || format('./src/{0}', matrix.service) }}
           push: ${{ github.event_name == 'push' }}
           tags: |
             ${{ env.REGISTRY }}/${{ matrix.service }}:latest
             ${{ env.REGISTRY }}/${{ matrix.service }}:${{ steps.vars.outputs.sha_short }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Build and push cartservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./src/cartservice/src
-          push: ${{ github.event_name == 'push' }}
-          tags: |
-            ${{ env.REGISTRY }}/cartservice:latest
-            ${{ env.REGISTRY }}/cartservice:${{ steps.vars.outputs.sha_short }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
