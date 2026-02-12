@@ -17,9 +17,9 @@
 # Declare variables to be passed into your templates.
 
 images:
-  repository: docker.io/srinivassrinu842/
+  repository: docker.io/srinivassrinu842
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "8ce8a0d"
+  tag: "dac5c18"
 serviceAccounts:
   # Specifies whether service accounts should be created.
   create: true
