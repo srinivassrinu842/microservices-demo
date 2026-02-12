@@ -19,7 +19,7 @@
 images:
   repository: docker.io/srinivassrinu842/
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "b368f94"
+  tag: "8ce8a0d"
 serviceAccounts:
   # Specifies whether service accounts should be created.
   create: true
