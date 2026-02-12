@@ -75,7 +75,7 @@ jobs:
         run: |
           # Modifies the values.yaml file using yq
           # Adjust the path below to your actual values.yaml file
-          yq -i '.images.repository = "${{ env.REGISTRY }}/${{ matrix.service }}"' ./helm-chart/values.yaml
+          yq -i ".images.repository = \"${REGISTRY%/}/${{ matrix.service }}\"" ./helm-chart/values.yaml
           yq -i ".images.tag = \"${{ needs.build-and-push.outputs.image_tag }}\"" ./helm-chart/values.yaml
           
       - name: Commit and Push Changes
